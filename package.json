@@ -1,0 +1,14 @@
+{
+    "name": "Dead Maze",
+    "version": "2.0.0",
+    "description": "Projekt końcowy Aplikacje",
+    "main": "server.js",
+    "author": {
+        "name": "Robert Pierog, Dawid Socha",
+        "email": "none"
+    },
+    "dependencies": {
+        "colors": "^1.1.2",
+        "tracer": ">0.0.0"
+    }
+}

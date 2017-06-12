@@ -1,0 +1,63 @@
+﻿ _____                 _    __  __               
+|  __ \               | |  |  \/  |              
+| |  | | ___  __ _  __| |  | \  / | __ _ _______ 
+| |  | |/ _ \/ _` |/ _` |  | |\/| |/ _` |_  / _ \
+| |__| |  __/ (_| | (_| |  | |  | | (_| |/ /  __/
+|_____/ \___|\__,_|\__,_|  |_|  |_|\__,_/___\___|
+
+Robert Pierog & Dawid Socha
+Klasa 3ia
+Grupa 2
+
+
+ _____      _                     _               _          _              _                  _              _ _ _      _          
+|  __ \    | |                   (_)             (_)        | |            | |                | |            | (_) |    //           
+| |__) |__ | |__  _ __ __ _ _ __  _  ___    _ __  _  ___ ___| |__   ___  __| |_ __  _   _  ___| |__     _ __ | |_| | _______      __
+|  ___/ _ \| '_ \| '__/ _` | '_ \| |/ _ \  | '_ \| |/ _ \_  / '_ \ / _ \/ _` | '_ \| | | |/ __| '_ \   | '_ \| | | |/ / _ \ \ /\ / /
+| |  | (_) | |_) | | | (_| | | | | |  __/  | | | | |  __// /| |_) |  __/ (_| | | | | |_| | (__| | | |  | |_) | | |   < (_) \ V  V / 
+|_|   \___/|_.__/|_|  \__,_|_| |_|_|\___|  |_| |_|_|\___/___|_.__/ \_ _|\__,_|_| |_|\__, |\___|_| |_|  | .__/|_|_|_|\_\___/ \_/\_/  
+                                                                     \\              __/ |  	       | |                          
+                                                                                     |___/             |_|                          
+
+•	Pobierz klienta i serwer bazy danych MongoDB z poniższej strony i zainstaluj.
+    https://www.mongodb.com/
+•	Pobierz serwer NodeJS ze strony poniżej i zainstaluj.
+    https://nodejs.org /
+•	Pobierz archiwum z grą ze strony poniżej i wypakuj je w wybrane miejsce na dysku.
+    Link do strony
+    
+
+ _    _                 _                     _            _                       
+| |  | |               | |                   (_)          (_)                      
+| |  | |_ __ _   _  ___| |__   ___  _ __ ___  _  ___ _ __  _  ___     __ _ _ __ _   _ 
+| |  | | '__| | | |/ __| '_ \ / _ \| '_ ` _ \| |/ _ \ '_ \| |/ _ \   / _` | '__| | | |
+| |__| | |  | |_| | (__| | | | (_) | | | | | | |  __/ | | | |  __/   |(_| | |  | |_| |
+ \____/|_|   \__,_|\___|_| |_|\___/|_| |_| |_|_|\___|_| |_|_|\___|   \__, |_|   \__, |
+                                                                      __/ |      __/ |
+                                                                      |___/      |___/ 
+                                                                   
+
+•	Przejdź do folderu gdzie została zainstalowana baza danych MongoDB, trzymając klawisz „shift” naciśnij prawy przycisk myszy i wybierz „Otwórz okno poleceń tutaj”.
+•	W oknie poleceń wpisz „mongoD” i zatwierdź enter’em.
+•	Przejdź do folderu gdzie została zainstalowana baza danych MongoDB, trzymając klawisz „shift” naciśnij prawy przycisk myszy i wybierz „Otwórz okno poleceń tutaj”.
+•	W oknie poleceń wpisz „mongo” i zatwierdź enter’em.
+•	W oknie poleceń wpisz: „use deadmaze”i zatwierdź enter’em.
+•	Przejdź do folderu z grą, trzymając klawisz „shift” naciśnij prawy przycisk myszy i wybierz „Otwórz okno poleceń tutaj”.
+•	W oknie poleceń wpisz „node server.js” i zatwierdź enter’em.
+•	Poczekaj aż wyświetli się komunikat, że serwer jest gotowy.
+•	Otwórz dowolną przeglądarkę internetową  i w oknie adresu wpisz: „[TWÓJ_ADRES_IP]:3000” lub „localhost:3000” (jeśli jesteś hostującym) i zatwierdź enter’em.
+•	GRAJ!
+
+
+ _____        _                          _              _                        
+|  __ \      | |                        (_)            | |                       
+| |  | | ___ | | __ _  ___ _______ _ __  _  ___      __| | ___     __ _ _ __ _   _ 
+| |  | |/ _ \| |/ _` |/ __|_  / _ \ '_ \| |/ _ \    / _` |/ _ \   / _` | '__| | | |
+| |__| | (_) | | (_| | (__ / /  __/ | | | |  __/    |(_| | (_) |  |(_| | |  | |_| |
+|_____/ \___/|_|\__,_|\___/___\___|_| |_|_|\___|    \__,_|\___/   \__, |_|   \__, |
+                                                                   __/ |      __/ |
+                                                                   |___/      |___/ 
+
+
+•	Otwórz dowolną przeglądarkę internetową  i w oknie adresu wpisz: „[TWÓJ_ADRES_IP]:3000” i zatwierdź enter’em.
+•	GRAJ!

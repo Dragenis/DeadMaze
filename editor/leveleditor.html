@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="js/three.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: auto;
+        }
+        
+        #plansza {
+            float: left;
+            background-color: rgba(128, 128, 128, 0.5);
+            width: 55vw;
+            height: 100vw;
+            /*display: block;*/
+            margin: 0 auto;
+            clear: both;
+            border-right: 3px black solid;
+            padding-top: 1.5vw;
+            overflow: auto;
+        }
+        
+        .pole {
+            margin-left: 0.5vw;
+            display: inline-block;
+            background-color: black;
+            height: calc(40vw /18);
+            width: calc(40vw /18);
+            overflow: hidden;
+        }
+        
+        #menu {
+            width: 100px;
+            text-align: center;
+            position: absolute;
+            left: calc(65vw - ( 100px / 2));
+            margin-top: 20px;
+        }
+        
+        #poletxt {
+            float: right;
+            background-color: rgba(128, 128, 128, 0.5);
+            width: 20vw;
+            height: 100vw;
+            border-left: 3px black solid;
+            padding-top: 1.5vw;
+        }
+        
+        #poletxt textarea {
+            width: 17vw;
+            height: 37vw;
+            background-color: black;
+            float: right;
+            margin-right: 0.5vw;
+            color: whitesmoke;
+        }
+        
+        #menu div {
+            display: block;
+            border: 5px grey outset;
+            border-radius: 3px;
+            background-color: silver;
+            margin: 3px;
+            font-variant: small-caps;
+            font-weight: bold;
+            font-size: 2vw;
+            width: 15vw;
+        }
+        
+        header {
+            padding: 10px;
+            border-bottom: 3px solid black;
+            text-align: center;
+            background-color: silver;
+        }
+
+    </style>
+    <script src="js/three.js"></script>
+    <script>
+        var obiekty_mapy = ["wall", "doors", "direction", "light", "door_quest1", "door_quest2", "door_quest3",
+            "answer1", "answer2", "answer3", "starter", "empty", "teleport"
+        ]
+        var kolory_obiektow = ["cyan", "brown", "red", "yellow", "magenta", "purple", "pink", "green", "orange", "lime", "white", "magenta", "gold"]
+        var aktualny_obiekt = obiekty_mapy[0]
+        var aktualny_x = 0;
+        var aktualny_z = 0;
+        var aktualny_id = 0;
+        var temp_id = 0;
+        var rozmiar_planszy = 20;
+        var aktualny_kolor = kolory_obiektow[0];
+        var delete_mode = false;
+        //-------load--------
+        window.addEventListener("load", function() {
+            //----------pola menu---------
+            for (var i = 0; i < obiekty_mapy.length; ++i) {
+                var option = document.createElement("div")
+                option.innerHTML = obiekty_mapy[i]
+                option.id = ("opcja_" + obiekty_mapy[i])
+                option.style.backgroundColor = kolory_obiektow[i]
+                option.addEventListener("click", function() {
+                    document.getElementById("opcja_" + aktualny_obiekt).style.border = "4px outset grey"
+                    aktualny_obiekt = this.innerHTML;
+                    aktualny_kolor = this.style.backgroundColor
+                    document.getElementById("opcja_" + aktualny_obiekt).style.border = "4px inset grey"
+                })
+                document.getElementById("menu").appendChild(option)
+            }
+            document.getElementById("opcja_" + obiekty_mapy[0]).style.border = "4px inset grey"
+            var option = document.createElement("div");
+            option.innerHTML = "undo";
+            option.id = "undo"
+            document.getElementById("menu").appendChild(option)
+            var option = document.createElement("div");
+            option.innerHTML = "delete";
+            option.id = "delete"
+            document.getElementById("menu").appendChild(option)
+            var option = document.createElement("div");
+            option.innerHTML = "clear";
+            option.id = "clear"
+            document.getElementById("menu").appendChild(option)
+            var option = document.createElement("div");
+            option.innerHTML = "parse";
+            option.id = "parse"
+            document.getElementById("menu").appendChild(option)
+            //--------pola planszy--------
+            for (i = 0; i < rozmiar_planszy; i++) {
+                for (j = 0; j < rozmiar_planszy; j++) {
+                    var pole = document.createElement("div")
+                    pole.className = "pole"
+                    pole.id = ("pole_" + j + "_" + i)
+                    pole.addEventListener("click", function() {
+                        console.log(this.id.split("_"))
+                        aktualny_x = this.id.split("_")[1]
+                        aktualny_z = this.id.split("_")[2]
+                        if (delete_mode == true) {
+                            if (sprawdz_pole() == true) {
+                                document.getElementById("pole_" + aktualny_x + "_" + aktualny_z).style.backgroundColor = "black"
+                                obiektmapa.level.splice(temp_id, 1)
+                                //delete obiektmapa.level[temp_id]
+                                console.log(obiektmapa.level.length)
+                                wypisz_obiekt()
+                                console.log(temp_id)
+                            }
+                        } else {
+                            if (sprawdz_pole() == true) {
+                                console.log("jaj")
+                                zmien_blok()
+                                koloruj()
+                            } else {
+                                nowy_blok()
+                                koloruj()
+                            }
+                        }
+                    })
+                    pole.addEventListener("contextmenu", function() {
+                        document.getElementById("pole_" + aktualny_x + "_" + aktualny_z).style.backgroundColor = "black"
+                    })
+                    document.getElementById("plansza").appendChild(pole)
+                }
+            }
+            //------------cofanie---------
+            document.getElementById("undo").addEventListener("click", function() {
+                if (aktualny_id > 0) {
+                    document.getElementById("pole_" + aktualny_x + "_" + aktualny_z).style.backgroundColor = "black"
+                    obiektmapa.level.splice(aktualny_id - 1, 1)
+                    wypisz_obiekt();
+                    console.log(obiektmapa.level.length)
+                    aktualny_id--
+                    if (aktualny_id > 0) {
+                        aktualny_x = obiektmapa.level[aktualny_id - 1].x
+                        aktualny_z = obiektmapa.level[aktualny_id - 1].z
+                    }
+                }
+            })
+            //------usuwanie--------
+            document.getElementById("delete").addEventListener("click", function() {
+                if (delete_mode == false) {
+                    delete_mode = true;
+                    document.getElementById("delete").style.border = "4px inset grey"
+                } else {
+                    delete_mode = false;
+                    document.getElementById("delete").style.border = "4px outset grey"
+                }
+            })
+            //-----------czyszczenie planszy--------
+            document.getElementById("clear").addEventListener("click", clear)
+
+            function clear() {
+                if (aktualny_id > 0) {
+                    obiektmapa = {
+                        "size": rozmiar_planszy,
+                        "level": []
+                    }
+                    wypisz_obiekt();
+                    aktualny_id = 0;
+                    for (i = 0; i < rozmiar_planszy; i++) {
+                        for (j = 0; j < rozmiar_planszy; j++) {
+                            document.getElementById("pole_" + j + "_" + i).style.backgroundColor = "black";
+                        }
+                    }
+                }
+            }
+            //--------odczyt z pola tekstowego------------
+            document.getElementById("parse").addEventListener("click", function() {
+                for (i = 0; i < rozmiar_planszy; i++) {
+                    for (j = 0; j < rozmiar_planszy; j++) {
+                        document.getElementById("pole_" + j + "_" + i).style.backgroundColor = "black";
+                    }
+                }
+                obiektmapa = JSON.parse(document.getElementById("textarea").value)
+                for (n = 0; n < obiektmapa.level.length; n++) {
+                    document.getElementById("pole_" + obiektmapa.level[n].x + "_" + obiektmapa.level[n].z).style.backgroundColor = sprawdz_kolor(obiektmapa.level[n].type)
+                }
+            })
+        })
+        //----------------
+        var obiektmapa = {
+            "size": rozmiar_planszy,
+            "level": []
+        }
+        var blok = {
+            "id": 0,
+            "x": 0,
+            "z": 0,
+            "type": ""
+        }
+
+        function nowy_blok() {
+            console.log("Nowy blok")
+            blok = {
+                "id": aktualny_id,
+                "x": aktualny_x,
+                "z": aktualny_z,
+                "type": aktualny_obiekt
+            }
+            obiektmapa.level.push(blok);
+            wypisz_obiekt()
+            aktualny_id++
+        }
+
+        function zmien_blok() {
+            console.log("Zmiana bloku")
+            blok = {
+                "id": temp_id,
+                "x": aktualny_x,
+                "z": aktualny_z,
+                "type": aktualny_obiekt
+            }
+            obiektmapa.level[temp_id] = blok;
+            wypisz_obiekt()
+        }
+
+        function sprawdz_kolor(nazwa) {
+            for (z = 0; z < obiekty_mapy.length; z++) {
+                if (nazwa == obiekty_mapy[z]) {
+                    console.log(kolory_obiektow[z])
+                    return kolory_obiektow[z]
+                    break;
+                }
+            }
+        }
+
+        function wypisz_obiekt() {
+            document.getElementById("textarea").value = JSON.stringify(obiektmapa, 0, null)
+        }
+
+        function koloruj() {
+            document.getElementById("pole_" + aktualny_x + "_" + aktualny_z).style.backgroundColor = aktualny_kolor
+        }
+
+        function sprawdz_pole() {
+            for (y = 0; y < obiektmapa.level.length; y++) {
+                if (aktualny_x == obiektmapa.level[y].x && aktualny_z == obiektmapa.level[y].z) {
+                    temp_id = y
+                    return true;
+                    break;
+                }
+            }
+            return false;
+        }
+
+    </script>
+</head>
+
+<body>
+    <header>Level editor</header>
+    <div id="plansza"> </div>
+    <div id="menu"> </div>
+    <div id="poletxt">
+        <textarea id="textarea"></textarea>
+    </div>
+</body>
+
+</html>

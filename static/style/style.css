@@ -1,0 +1,239 @@
+#options {
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: -200px;
+    background-color: rgba(128, 128, 128, 0.8);
+    height: 100vh;
+    z-index: 1000;
+}
+
+body {
+    background-color: silver;
+    margin: 0 auto;
+}
+
+#container {
+    margin: 0 auto;
+}
+
+#load_screen {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    margin: 0 auto;
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: none;
+}
+
+#load_screen h1,
+#load_screen img {
+    margin: 0 auto;
+}
+
+#player_ui {
+    /*position: absolute;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.8);*/
+}
+
+#ui_gracza {
+    width: 300px;
+    height: 170px;
+    background-color: silver;
+    position: absolute;
+    z-index: 90;
+    bottom: 3vh;
+    left: 0.5vw;
+    opacity: 0.4;
+    margin: 4px;
+}
+
+#ui_gracza span {
+    color: white;
+}
+
+#przychodzace {
+    position: relative;
+    top: 5px;
+    left: 5px;
+    width: 290px;
+    height: 115px;
+    background-color: cadetblue;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#przychodzace div {
+    position: relative;
+}
+
+#time2 {
+    float: right;
+    opacity: 0.9;
+}
+
+#wiadomosc {
+    position: relative;
+    width: 225px;
+    left: 5px;
+    top: 10px;
+}
+
+#wyslij {
+    position: relative;
+    right: -10px;
+    top: 10px;
+}
+
+#kompas {
+    position: absolute;
+    top: 0.5vh;
+    right: 0.5vh;
+    z-index: 90;
+    width: 200px;
+    height: 200px;
+    /*background-color: red;*/
+}
+
+.cala {}
+
+.name {}
+
+.wiadomosc {
+    width: 200px;
+}
+
+@font-face {
+    font-family: PressStart2P;
+    src: url(../fonts/PressStart2P.ttf);
+}
+
+#first_screen {
+    position: absolute;
+    background: url(../img/start_bcg.png) no-repeat;
+    background-size: 99%;
+    color: orange;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    z-index: 998;
+}
+
+#loadscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#nazwa_gry {
+    font-family: PressStart2P;
+    position: relative;
+    top: 100px;
+    left: 300px;
+    font-size: 800%;
+    text-shadow: 0 1px 0 rgb(204, 204, 204), 0 2px 0 rgb(201, 201, 201), 0 3px 0 rgb(187, 187, 187), 0 4px 0 rgb(185, 185, 185), 0 5px 0 rgb(170, 170, 170), 0 6px 1px rgba(0, 0, 0, 0.0980392), 0 0 5px rgba(0, 0, 0, 0.0980392), 0 1px 3px rgba(0, 0, 0, 0.298039), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.247059), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.14902);
+}
+
+#loadscreen img {
+    position: absolute;
+    opacity: 0.1;
+    background-size: 100% 100%;
+}
+
+#start_gry {
+    font-family: PressStart2P;
+    position: absolute;
+    bottom: 10vh;
+    left: 300px;
+    width: 600px;
+    height: 100px;
+    font-size: 200%;
+    color: orange;
+    border-radius: 50px;
+    cursor: pointer;
+    text-shadow: 0 1px 0 rgb(204, 204, 204), 0 2px 0 rgb(201, 201, 201), 0 3px 0 rgb(187, 187, 187), 0 4px 0 rgb(185, 185, 185), 0 5px 0 rgb(170, 170, 170), 0 6px 1px rgba(0, 0, 0, 0.0980392), 0 0 5px rgba(0, 0, 0, 0.0980392), 0 1px 3px rgba(0, 0, 0, 0.298039), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.247059), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.14902);
+}
+
+
+/*HELP*/
+
+#help {
+    background-color: silver;
+    opacity: 16;
+    width: 300px;
+    position: absolute;
+    top: 58px;
+    left: 8px;
+    display: none;
+    z-index: 999;
+}
+
+#help h3 {
+    margin-bottom: 2px;
+    font-weight: bolder;
+}
+
+#help p {
+    margin: 0;
+    font-size: 90%;
+}
+
+#help_img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 999;
+}
+
+#help_img img {
+    width: 50px;
+    height: 50px;
+    margin-left: -8px;
+    margin-top: -4px;
+}
+
+#wynik {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 300px;
+    cursor: pointer;
+}
+
+#ruch,
+#zagadki,
+#kierunek {
+    color: black;
+}
+
+#rekordy {
+    position: absolute;
+    top: 58px;
+    left: 8px;
+    background-color: silver;
+}
+
+.koniec {
+    position: absolute;
+    z-index: 999;
+    bottom: 0px;
+    margin: 0 auto;
+    left: 350px;
+}
+
+#przegrana {
+    display: none;
+}
+
+#wygrana {
+    display: none;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Projekt koncowy Aplikacje Serwerowe</title>
+    <meta charset="utf-8" />
+    <link href="style/style.css" rel="stylesheet" />
+    <script src="libs/SocketIo.js"></script>
+    <script src="libs/three.js"></script>
+    <script src="libs/jquery.js"></script>
+    <script src="js/Game.js"></script>
+    <script src="js/Net.js"></script>
+    <script src="js/UI.js"></script>
+    <script src="js/Level.js"></script>
+    <script src="js/LevelData.js"></script>
+    <script src="js/MyLight.js"></script>
+    <script src="js/Kompas.js"></script>
+    <script src="js/Riddles.js"></script>
+    <script src="js/Chat.js"></script>
+    <script src="libs/OrbitControls.js"></script>
+    <script src="libs/Stats.js"></script>
+    <script>
+        var help = false;
+        var game;
+        var net;
+        var ui;
+        var chat;
+        window.addEventListener("load", function() {
+            document.getElementById("start_gry").addEventListener("click", function() {
+                game = new Game();
+                net = new Net();
+                ui = new Ui();
+                chat = new Chat();
+                chat.init();
+                game.init();
+                net.init();
+                document.getElementById("first_screen").style.display = "none";
+            })
+            document.getElementById("help_img").addEventListener("click", function() {
+                if (help == false) {
+                    document.getElementById("help").style.display = "block"
+                    help = true;
+                } else {
+                    document.getElementById("help").style.display = "none"
+                    help = false;
+                }
+            })
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <div id="player_ui"></div>
+
+    <div id="options">
+        <div id="stats"></div>
+        <input type="checkbox" id="ch_kamera" checked />Kamera<br />
+        <input type="range" min="20" max="300" value="26" id="range_1" />
+        <input type="range" min="-20" max="300" value="-6" id="range_2" />
+        <input type="range" min="-300" max="300" value="0" id="range_3" /><br>
+        <input type="button" value="Reset graczy" id="reset" />
+    </div>
+
+    <div id="load_screen">
+        <h1 id="loading_text">Loading</h1>
+        <img src="img/loader.gif" alt="..." />
+    </div>
+
+    <div id="ui_gracza">
+        <span>Player:</span><span id="player_name">---</span>
+        <span id="time2">Time:<span id="time">00:00</span></span>
+        <forma ction="javascript:;" onsubmit="myFunction(this)">
+            <div id="przychodzace"></div>
+            <!--
+                <textarea class="przychodzace"></textarea>
+            -->
+            <input id="wiadomosc" autocomplete="off" />
+            <input id="wyslij" type="button" value="Wyślij">
+            </form>
+    </div>
+    <canvas width="200" height="200" id="kompas"></canvas>
+    <button id="help_img"><img src="img/help.png" alt="?" ></button>
+    <div id="help">
+        <section id="ruch">
+            <h3>Poruszanie się:</h3>
+            <p>W - ruch postaci do przodu</p>
+            <p>A - obrót postaci w lewo</p>
+            <p>D - obrót postaci w prawo</p>
+        </section>
+        <section id="zagadki">
+            <h3>Zagadki</h3>
+            <p>Aby uzyskać zagadkę, kliknij lewym przyciskiem myszy na drzwi. Zostanie wyświetlone okno, gdzie masz wpisać odpowiedź.</p>
+        </section>
+        <section id="kierunek">
+            <h3>Kierunek</h3>
+            <p>Czerwony blok ściany z napisami podpowiada w którą stronę powinieneś iść.</p>
+        </section>
+        <!--<section id="wyniki">
+                <button id="wynik">Pokaż wyniki</button>
+</section>-->
+    </div>
+    <div id="rekordy"></div>
+    <div id="first_screen">
+        <!-- HELP -->
+
+
+        <!-- Start screen -->
+        <div id="loadscreen">
+            <!-- <img src="static/mats/start_bcg.png"> -->
+            <span id="nazwa_gry">Dead</br> Maze</span>
+            <button id="start_gry">Start</button>
+        </div>
+    </div>
+    <div id="przegrana" class="koniec">
+        <h1>Przegrales</h1>
+        <h2>Przeciwnyk ukonczył labirynt przed tobą.</h2>
+        <h2>Powodzenia nastepnym razem</h2>
+    </div>
+    <div id="wygrana" class="koniec">
+        <h1>Wygrales</h1>
+        <h2>Gratulacje</h2>
+
+    </div>
+</body>
+
+</html>
