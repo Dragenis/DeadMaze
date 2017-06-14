@@ -1,5 +1,4 @@
 module.exports = function () {
-
     var opers = {
         InsertOne: function (data) {
             data.save(function (error, data, dodanych) {
